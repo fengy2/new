@@ -1,0 +1,31 @@
+#!/usr/bin/python
+#-*- coding: UTF-8 -*-
+from bottle import route, run, template, request
+
+    #登录  
+@route('/login',method='post')
+def login():
+
+        username = request.forms.get("username");
+        password = request.forms.get("password");
+
+        print(username,password)
+
+        if username =='admin' and password =='admin':
+            return username+'登录成功';
+        else :
+            return username+'登录失败';
+
+    #用户登录页面的  
+@route("/index")
+def index():
+
+        return template("index1")
+
+    #@route('/hello/:name')  
+    #def index(name='World'):  
+    #    return '<b>Hello %s!</b>' % name  
+
+
+    #默认端口  run(host='localhost', port=8080)  
+run()                     
