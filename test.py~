@@ -6,65 +6,84 @@ import redis, json,sys
 
 ################################################################################# db 0 最外层 ############################################################################################
 r=redis.Redis(host='localhost',port=6379,db=0)
-stringList=[]
-listList=[]
-setList=[]
-hashList=[]
-sortedList=[]
-
-dictString={} # index中 string dict
-dictList={} # index中 list dict
-dictHash={} # index中 hash dict
-dictSet={} # index中 set dict
-dictSorted={} # index中 sorted dict
-
 #返回Json格式
-jsonString={}
-jsonList={}
-tmp=[]
-for i in r.keys():
-        if i.startswith("String"):
-                jsonString['pre']='String'
-                jsonString['key']=i
-                jsonString['value']=r.get(i)
-        elif i.startswith("List"):
-                jsonList['pre']='List'
-                jsonList['key']=i
-                jsonList['value']=r.get(i)
-@route('/jsonstring')
-def fun():
-        encodedjson = json.dumps(jsonString)
-        str='[{"pre": "String", "value": "22", "key": "String:2"}]'
-        return str 
-@route('/jsonlist')
-def fun1():
-        return jsonList     
 
-# db0 key分类，以及分类后的(key,value)
+listS=[]
+listL=[]
+listH=[]
+listSet=[]
+listSorted=[]
+
 for elem in r.keys():
         if elem.startswith("String"):
-                dictString[elem]=r.get(elem)
-		stringList.append(elem)
+                dictString={}
+                dictString['pre']='String'
+                dictString['key']=elem
+                dictString['value']=r.get(elem)
+                listS.append(dictString)
 
         elif elem.startswith("List"):
-                dictList[elem]=r.get(elem)
-                listList.append(elem)
+		dictList={}
+                dictList['pre']='List'
+                dictList['key']=elem
+                dictList['value']=r.get(elem)
+                listL.append(dictList)
 
         elif elem.startswith("Hash"):
-                dictHash[elem]=r.get(elem)
-                hashList.append(elem)
+		dictHash={}
+                dictHash['pre']='Hash'
+                dictHash['key']=elem
+                dictHash['value']=r.get(elem)
+                listH.append(dictHash)
 
         elif elem.startswith("Set"):
-                dictSet[elem]=r.get(elem)
-                setList.append(elem)
+		dictSet={}
+                dictSet['pre']='Set'
+                dictSet['key']=elem
+                dictSet['value']=r.get(elem)
+                listSet.append(dictSet)
 
-        elif elem.startswith("SortedSet"):
-                dictSorted[elem]=r.get(elem)
-                sortedList.append(elem)
+        elif elem.startswith("Sorted"):
+		dictSorted={}
+                dictSorted['pre']='Sorted'
+                dictSorted['key']=elem
+                dictSorted['value']=r.get(elem)
+                listSorted.append(dictSorted)
+            
+@route('/jsonstring')
+def stringQuant():
+        tmp=json.dumps(listS)
+        return str(tmp)
+@route('/jsonlist')
+def listQuant():
+        tmp=json.dumps(listL)
+        return str(tmp)    
+@route('/jsonhash')
+def hashQuant():
+        tmp=json.dumps(listH)
+        return str(tmp)
+@route('/jsonset')
+def setQuant():
+        tmp=json.dumps(listSet)
+        return str(tmp)
+@route('/jsonsorted')
+def sortedQuant():
+        tmp=json.dumps(listSorted)
+        return str(tmp)
+
+
+
+for elem in r.keys():
+
+
+
 
 @route('/info')
 def getInfo():
-        return r.info()
+	tmpList=[]
+	tmpList.append(r.info())
+	tmp=json.dumps(tmpList)
+        return str(tmp)
 
 @route('/size')
 def getSize():
@@ -72,76 +91,26 @@ def getSize():
 
 @route('/string')
 def getString():
-	return '%d'%(len(stringList))
+	return '%d'%(len(listS))
 
 @route('/list')
 def getList():
-        return '%d'%(len(listList))
+        return '%d'%(len(listL))
 
 @route('/hash')
 def getHash():
-        return '%d'%(len(hashList))
+        return '%d'%(len(listH))
 
 @route('/set')
 def getSet():
-        return '%d'%(len(setList))
+        return '%d'%(len(listSet))
 
 @route('/sorted')
 def getSorted():
-        return '%d'%(len(sortedList))
+        return '%d'%(len(listSorted))
 
 
 
-
-##############################    db1   ########################################
-
-r1=redis.Redis(host='localhost',port=6379,db=1)
-stringList1=[]
-listList1=[]
-setList1=[]
-hashList1=[]
-sortedList1=[]
-
-
-for elem in r1.keys():
-	if elem.startswith("String"):
-		stringList1.append(elem)
-        elif elem.startswith("List"):
-                listList1.append(elem)
-        elif elem.startswith("Hash"):
-                hashList1.append(elem)
-        elif elem.startswith("Set"):
-                setList1.append(elem)
-        elif elem.startswith("SortedSet"):
-                sortedList1.append(elem)
-
-@route('/info1')
-def getInfo1():
-        return r1.info()
-
-@route('/size1')
-def getSize1():
-        return '%d'%(r1.dbsize())
-
-@route('/string1')
-def getString1():
-	return '%d'%(len(stringList1))
-
-@route('/list1')
-def getList1():
-        return '%d'%(len(listList1))
-
-@route('/hash1')
-def getHash1():
-        return '%d'%(len(hashList1))
-
-@route('/set1')
-def getSet1():
-        return '%d'%(len(setList1))
-
-@route('/sorted1')
-def getSorted1():
-        return '%d'%(len(sortedList1))
 
 
 ############################       Implementation       ###################################
@@ -153,7 +122,23 @@ def index():
 @route("/indexstringdetail")
 def indexStringDetail():
 	return template("indexstringdetail")
+
+@route("/indexlistdetail")
+def indexListDetail():
+	return template("indexlistdetail")
+
+@route("/indexhashdetail")
+def indexHashDetail():
+	return template("indexhashdetail")
+@route("/indexsetdetail")
+def indexSetDetail():
+	return template("indexsetdetail")
+@route("/indexsorteddetail")
+def indexSortedDetail():
+	return template("indexsorteddetail")
     
+
+
 #返回DB0中以各个Prefix开头key的数量
 @route("/index/stringkeys")
 def indexStringKeys():	

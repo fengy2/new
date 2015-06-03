@@ -75,8 +75,8 @@
 	<div class="row-fluid">
 		<div class="span3" id="sidebar">
 			<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> 数据库 1 </a></li>-->
-				<li class="active"> <a href="index"><span class="badge badge-success pull-right" id="redisKeys"></span> 数据库 1</a> </li>
+				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> DB 1</a></li>-->
+				<li class="active"> <a href="index"><span class="badge badge-success pull-right" id="redisKeys"></span> 数据库 1 </a> </li>
 				<li> <a href="index1"><span class="badge badge-success pull-right" id="redisKeys1"></span> DB 2</a> </li>
 				<li> <a href="#"><i class="icon-chevron-right"></i> DB 3</a> </li>
 				<li> <a href="#"><i class="icon-chevron-right"></i> DB 4</a> </li>
@@ -193,7 +193,7 @@ var s;
 		function test1(){
 			$.ajax({
 				 type: "GET",
-				 url:"http://localhost:8080/jsonstring",
+				 url:"http://localhost:8080/jsonset",
 				 //data: {username:$("#username").val(), content:$("#content").val()},
 				 dataType: "json",
 				 success: function(data){
@@ -351,135 +351,7 @@ var s;
 	
 	
 	///////////////////////////////////////////////////////////////////////////       db 1           //////////////////////////////////////////////////////////////////////////////////////////////////	
-		// db1的key总数
-			function getRedisKeys1(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/size1",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				 	$("#redisKeys1").html(data);
-				 },
-				error:function(a){
-				
-				}
-			});
-		}
-// db0 r.info()
-			function getRedisInfo(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/info",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisInfo").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
 
-// db0的前缀String数量
-		function getRedisStringValue(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/string",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisStringValue").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
-
-
-// db0的前缀list数量		
-			function getRedisListValue(){
-			$.ajax({
-				 type: "GET",
-
-				 url:"http://localhost:8080/list",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisListValue").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
-
-		
-	
-
-		
-// db0的前缀hash数量			
-			function getRedisHashValue(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/hash",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisHashValue").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
-
-
-// db0的前缀set数量
-			function getRedisSetValue(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/set",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisSetValue").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
-		
-// db0的前缀sorted数量		
-			function getRedisSortedValue(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/sorted",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "text",
-				 success: function(data){
-				
-				$("#redisSortedValue").html(data);
-				
-},
-				error:function(a){
-				
-				}
-			});
-		}
 
 
 </script>

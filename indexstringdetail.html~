@@ -75,8 +75,8 @@
 	<div class="row-fluid">
 		<div class="span3" id="sidebar">
 			<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> DB 1</a></li>-->
-				<li class="active"> <a href="index"><span class="badge badge-success pull-right" id="redisKeys"></span> DB 1</a> </li>
+				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> 数据库 1 </a></li>-->
+				<li class="active"> <a href="index"><span class="badge badge-success pull-right" id="redisKeys"></span> 数据库 1</a> </li>
 				<li> <a href="index1"><span class="badge badge-success pull-right" id="redisKeys1"></span> DB 2</a> </li>
 				<li> <a href="#"><i class="icon-chevron-right"></i> DB 3</a> </li>
 				<li> <a href="#"><i class="icon-chevron-right"></i> DB 4</a> </li>
@@ -111,15 +111,16 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
 								<thead>
 									<tr>
-										<th>Rendering engine</th>
-										<th>Browser</th>
-										<th>Platform(s)</th>
-										<th>Engine version</th>
-										<th>CSS grade</th>
+										<th>Prefix</th>
+										<th>Key</th>
+										<th>Value</th>
+<!--										<th>Engine version</th>
+										<th>CSS grade</th>-->
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="odd gradeX">
+								
+								
+									<!--<tr class="odd gradeX">
 										<td>Trident</td>
 										<td>Internet
 											Explorer 4.0</td>
@@ -142,9 +143,9 @@
 										<td>Win 95+</td>
 										<td class="center">5.5</td>
 										<td class="center">A</td>
-									</tr>
-								</tbody>
-								<tbody</tbody>
+									</tr>-->
+								
+								
 								
 							</table>
 						</div>
@@ -189,6 +190,36 @@ var s;
    
 
 
+
+		function test1(){
+			$.ajax({
+				 type: "GET",
+				 url:"http://localhost:8080/jsonstring",
+				 //data: {username:$("#username").val(), content:$("#content").val()},
+				 dataType: "json",
+				 success: function(data){
+					//var temp = "<tr class="odd gradeX"><td>Trident</td><td>InternetExplorer 4.0</td><td>Win 95+</td><td class="center"> 4</td><td class="center">X</td></tr>";
+					var html = '';
+					html=''
+					//[{"key":"string","Pre":"String","value":"11"},{}]
+					for(var i=0;i<data.length;i++){
+						html += '<tbody><tr class="odd gradeX"><td>'+ data[i].pre +'</td><td>'+ data[i].key +'</td><td>'+ data[i].value +'</td></tr></tbody>';	
+						
+					}
+					
+					 
+					$('#example12').html(html);
+				//alert(data);
+				
+				//var z = eval(data);
+				console.log(data);
+				console.log(data[0].pre);
+				},
+				error:function(a){
+					alert("error");
+				}
+			});
+		}
 
 
 // db0的key总数
@@ -451,29 +482,6 @@ var s;
 			});
 		}
 
-
-		function test1(){
-			$.ajax({
-				 type: "GET",
-				 url:"http://localhost:8080/jsonstring",
-				 //data: {username:$("#username").val(), content:$("#content").val()},
-				 dataType: "json",
-				 success: function(data){
-					//var temp = "<tr class="odd gradeX"><td>Trident</td><td>InternetExplorer 4.0</td><td>Win 95+</td><td class="center"> 4</td><td class="center">X</td></tr>";
-					var html = '';
-					//[{"key":"string","Pre":"String","value":"11"},{}]
-					for(var i=0;i<data.length;i++){
-						html += '<tr class="odd gradeX"><td>'+ data[i].pre +'</td><td>'+ data[i].key +'</td><td>'+ data[i].value +'</td></tr>';	
-					}
-					 
-					$('#tbody').html(html);
-				alert(data);
-				},
-				error:function(a){
-					alert("test1");
-				}
-			});
-		}
 
 </script>
 </body>
