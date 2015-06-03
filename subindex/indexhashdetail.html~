@@ -75,7 +75,7 @@
 	<div class="row-fluid">
 		<div class="span3" id="sidebar">
 			<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> 数据库 1 </a></li>-->
+				<!--   <li class="active"> <a href="index.html"><i class="icon-chevron-right"></i> 数据库 0 </a></li>-->
 				<li class="active"> <a href="index"><span class="badge badge-success pull-right" id="redisKeys"></span> 数据库 1 </a> </li>
 				<li> <a href="index1"><span class="badge badge-success pull-right" id="redisKeys1"></span> DB 2</a> </li>
 				<li> <a href="#"><i class="icon-chevron-right"></i> DB 3</a> </li>

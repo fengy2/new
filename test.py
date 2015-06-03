@@ -119,21 +119,21 @@ def index():
     
 @route("/indexstringdetail")
 def indexStringDetail():
-	return template("indexstringdetail")
+	return template("./subindex/indexstringdetail")
 
 @route("/indexlistdetail")
 def indexListDetail():
-	return template("indexlistdetail")
+	return template("./subindex/indexlistdetail")
 
 @route("/indexhashdetail")
 def indexHashDetail():
-	return template("indexhashdetail")
+	return template("./subindex/indexhashdetail")
 @route("/indexsetdetail")
 def indexSetDetail():
-	return template("indexsetdetail")
+	return template("./subindex/indexsetdetail")
 @route("/indexsorteddetail")
 def indexSortedDetail():
-	return template("indexsorteddetail")
+	return template("./subindex/indexsorteddetail")
     
 
 

@@ -73,8 +73,6 @@ def sortedQuant():
 
 
 
-for elem in r.keys():
-
 
 
 
@@ -121,7 +119,7 @@ def index():
     
 @route("/indexstringdetail")
 def indexStringDetail():
-	return template("indexstringdetail")
+	return template("./subindex/indexstringdetail")
 
 @route("/indexlistdetail")
 def indexListDetail():
