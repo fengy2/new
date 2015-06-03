@@ -2,13 +2,26 @@
 #-*- coding: UTF-8 -*-
 from bottle import route, run, template, request,static_file
 from bottle import *
+import redis
 
 #@route('/static/<filename:re:.*\.css>')
+
+r=redis.Redis(host='localhost',port=6379,db=0)
+stringList=[]
+listList=[]
+setList=[]
+hashList=[]
+sortedList=[]
+
+@route('/dash1')
+def getSize():
+        return 'Redis contains %d information.'%(r.dbsize())
+
  
-@route("/index1")
+@route("/dash")
 def index():
 
-        return template("index1")
+        return template("Dashboard_Template_for_Bootstrap_files")
 
 @route('/static/css/<filename>')
 def stylesheets(filename):

@@ -1,31 +1,31 @@
 #!/usr/bin/python
 #-*- coding: UTF-8 -*-
-from bottle import route, run, template, request
+from bottle import route, run, template, request,static_file
+from bottle import *
 
-    #登录  
-@route('/login',method='post')
-def login():
-
-        username = request.forms.get("username");
-        password = request.forms.get("password");
-
-        print(username,password)
-
-        if username =='admin' and password =='admin':
-            return username+'登录成功';
-        else :
-            return username+'登录失败';
-
-    #用户登录页面的  
-@route("/index")
+#@route('/static/<filename:re:.*\.css>')
+ 
+@route("/index1")
 def index():
 
         return template("index1")
 
-    #@route('/hello/:name')  
-    #def index(name='World'):  
-    #    return '<b>Hello %s!</b>' % name  
+@route('/static/css/<filename>')
+def stylesheets(filename):
+    return static_file(filename,root='./static/css')
+
+@route('/static/js/<filename>')
+def javascript(filename): 
+    return static_file(filename,root='./static/js')
+
+@route('/static/images/<filename>')
+def images(filename): 
+    return static_file(filename,root='./static/images')
+
+@route('/static/fonts/<filename>')
+def fonts(filename):
+    return static_file(filename,root='./static/fonts')
 
 
-    #默认端口  run(host='localhost', port=8080)  
-run()                     
+
+run(host='localhost', port=8080,debug=True)                    
